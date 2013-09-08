@@ -12,9 +12,14 @@ object_types:
     objectasset:
         order: integer default 1
 
-init_app: $SortableEntryAssets::SortableEntryAssets::Util::init_app
+applications:
+    cms:
+        callbacks:
+            cms_post_save.entry: '$SortableEntryAssets::SortableEntryAssets::Callbacks::post_save_entry'
+            template_source.edit_entry: '$SortableEntryAssets::SortableEntryAssets::Callbacks::source_edit_entry'
+            template_param.edit_entry: '$SortableEntryAssets::SortableEntryAssets::Callbacks::param_edit_entry'
 
-callbacks:
-    cms_post_save.entry: $SortableEntryAssets::SortableEntryAssets::Callbacks::post_save_entry
-    MT::App::CMS::template_source.edit_entry: $SortableEntryAssets::SortableEntryAssets::Callbacks::source_edit_entry
-    MT::App::CMS::template_param.edit_entry: $SortableEntryAssets::SortableEntryAssets::Callbacks::param_edit_entry
+tags:
+    block:
+        EntryAssets: '$SortableEntryAssets::SortableEntryAssets::Util::assets_tag'
+        PageAssets: '$SortableEntryAssets::SortableEntryAssets::Util::assets_tag'
