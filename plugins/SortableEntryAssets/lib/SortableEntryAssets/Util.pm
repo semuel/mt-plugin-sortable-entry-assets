@@ -34,18 +34,19 @@ sub assets_tag {
                 },
                 {
                     sort      => 'order', # preserve custom sorting order
-                    direction => ($args->{sort_order} || '') eq 'descend' ? 'descend' : 'ascend',
+                    direction => 'ascend',
                 }
             )
         }
     );
     return $ctx->_hdlr_pass_tokens_else(@_) unless @assets and $assets[0];
     local $args->{sort_by} = 'entryasset_order';
+    $args->{sort_order} ||= 'ascend';
     local $ctx->{__stash}{assets} = \@assets;
     local $ctx->{__stash}{tag} = 'assets';
-    my $order = scalar @assets;
+    my $order = 1;
     foreach my $asset (@assets) {
-        $asset->{entryasset_order} = $order--;
+        $asset->{entryasset_order} = $order++;
     }
 
     my $result = $ctx->super_handler( $args, $cond );
