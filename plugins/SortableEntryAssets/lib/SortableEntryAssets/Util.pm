@@ -43,9 +43,9 @@ sub assets_tag {
     local $args->{sort_by} = 'entryasset_order';
     local $ctx->{__stash}{assets} = \@assets;
     local $ctx->{__stash}{tag} = 'assets';
-    my $order = 1;
+    my $order = scalar @assets;
     foreach my $asset (@assets) {
-        $asset->{entryasset_order} = $order++;
+        $asset->{entryasset_order} = $order--;
     }
 
     my $result = $ctx->super_handler( $args, $cond );
