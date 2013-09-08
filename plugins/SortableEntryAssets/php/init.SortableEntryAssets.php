@@ -15,6 +15,9 @@ BaseObject::install_meta($cls, 'blog_id, objectasset_order', 'frog');
 function sortable_entry_assets_tag(&$args, $content, &$ctx, &$repeat) {
     if (!isset($content) && !isset($args['sort_by'])) {
         $args['sort_by'] = 'blog_id, objectasset_order';
+        if (!isset($args['sort_order'])) {
+        	$args['sort_order'] = 'ascend';
+        }
     }
     return smarty_block_mtassets($args, $content, $ctx, $repeat);
 }
