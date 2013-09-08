@@ -42,6 +42,7 @@ sub assets_tag {
     return $ctx->_hdlr_pass_tokens_else(@_) unless @assets and $assets[0];
     local $args->{sort_by} = 'entryasset_order';
     local $ctx->{__stash}{assets} = \@assets;
+    local $ctx->{__stash}{tag} = 'assets';
     my $order = 1;
     foreach my $asset (@assets) {
         $asset->{entryasset_order} = $order++;
